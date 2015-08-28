@@ -15,7 +15,7 @@ public  class Keyboard implements KeyListener{
 		right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
 		
 		
-		for (int i = 0; i< keys.length; i++) {
+		for (int i = 0; i< keys.length; i++) {    //Console output for keys pressed
 			if (keys[i]) {
 				System.out.println("Key:  " + i);
 			}

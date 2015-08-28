@@ -35,9 +35,11 @@ public class Game extends Canvas implements Runnable {
 	public Game () {  // constructor new Game() ---> executes everything here ONCE
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size); // found in Canvas
+		setFocusable(true); //The window now auto focuses
 		screen = new Screen(width, height);
 		
 		frame = new JFrame();
+		
 		key = new Keyboard();
 		
 		addKeyListener(key); // after instanciating key
