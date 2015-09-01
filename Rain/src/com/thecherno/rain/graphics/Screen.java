@@ -7,10 +7,12 @@ import com.thecherno.rain.level.tile.Tile;
 
 public class Screen {
 	
-	private int width, height;
+	public int width, height;
 	public int[] pixels;
 	public final int MAP_SIZE = 64;
 	public final int MAP_SIZE_MASK = MAP_SIZE - 1;
+	
+	public int xOffset, yOffset;
 	public int[] tiles = new int [MAP_SIZE * MAP_SIZE]; // 4096 // map size
 	private Random random = new Random();
 
@@ -34,7 +36,7 @@ public class Screen {
 			}
 	}
 	
-	public void render(int xOffset, int yOffset) {
+	/*public void render(int xOffset, int yOffset) {
 		
 		
 		for (int y = 0; y < height; y++) {
@@ -49,16 +51,28 @@ public class Screen {
 			}
 		}
 	}
+	*/
 	
 	public void renderTile (int xp, int yp, Tile tile) {       // xp, yp = tile position
+		xp -= xOffset;
+		yp -= yOffset;
 		for (int y = 0; y < tile.sprite.SIZE; y++) {
 			int ya = y + yp;
 			for (int x = 0; x < tile.sprite.SIZE; x++) {
 				int xa = x + xp;
-				if (xa < 0 || xa >= width || ya < 0 || ya >= width) break;
+				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa =0;
+				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+		
 			}
 		}
 		
+	}
+	
+	public void setOffset(int xOffset, int yOffset) {
+		
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 	}
 
 	
